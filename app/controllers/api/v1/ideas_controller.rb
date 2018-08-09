@@ -1,5 +1,9 @@
 module Api::V1
   class IdeasController < ApplicationController
+    include DeviseTokenAuth::Concerns::SetUserByToken
+
+    before_action :authenticate_user!
+
     def index
       @ideas = Idea.order("created_at DESC")
       render json: @ideas

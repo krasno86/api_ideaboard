@@ -22,8 +22,11 @@ module IdeaboardApi
     config.load_defaults 5.1
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'http://localhost:3000'
-        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+                 methods: [:get, :post, :options, :delete, :put]
       end
     end
     # Settings in config/environments/* take precedence over those specified here.
